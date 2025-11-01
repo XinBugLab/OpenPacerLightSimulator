@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 const SimulationView = ({ numLights, lightStates }) => {
   const containerRef = useRef(null);
@@ -7,9 +7,11 @@ const SimulationView = ({ numLights, lightStates }) => {
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
+        // Account for padding (1rem = 16px typically)
+        const paddingSize = 32; // 1rem * 2 (left + right or top + bottom)
         setContainerSize({
-          width: containerRef.current.offsetWidth,
-          height: containerRef.current.offsetHeight,
+          width: containerRef.current.offsetWidth - paddingSize,
+          height: containerRef.current.offsetHeight - paddingSize,
         });
       }
     };
@@ -27,7 +29,8 @@ const SimulationView = ({ numLights, lightStates }) => {
   const originalWidth = straightLength + 2 * curveRadius;
   const originalHeight = 2 * curveRadius;
 
-  const scale = Math.min(
+  const SAFETY_FACTOR = 0.92;
+  const scale = SAFETY_FACTOR * Math.min(
     containerSize.width / originalWidth,
     containerSize.height / originalHeight
   );
@@ -35,8 +38,10 @@ const SimulationView = ({ numLights, lightStates }) => {
   const scaledStraightLength = straightLength * scale;
   const scaledCurveRadius = curveRadius * scale;
 
-  const offsetX = (containerSize.width - (scaledStraightLength + 2 * scaledCurveRadius)) / 2;
-  const offsetY = (containerSize.height - 2 * scaledCurveRadius) / 2;
+  // Add padding offset since lights are positioned relative to the full container
+  const paddingOffset = 16; // 1rem padding
+  const offsetX = (containerSize.width - (scaledStraightLength + 2 * scaledCurveRadius)) / 2 + paddingOffset;
+  const offsetY = (containerSize.height - 2 * scaledCurveRadius) / 2 + paddingOffset;
 
   const trackLaneWidth = 10; // As an original dimension, not pixels
   const scaledTrackLaneWidth = trackLaneWidth * scale;
@@ -88,14 +93,14 @@ const SimulationView = ({ numLights, lightStates }) => {
           transform: 'translate(-50%, -50%)',
           width: `${lightSize}px`,
           height: `${lightSize}px`,
-          backgroundColor: lightState.state === 'on' ? '#ffeb3b' : '#444',
+          backgroundColor: lightState.brightness > 0 ? '#ffeb3b' : '#444',
           borderRadius: '50%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: `${lightSize / 2}px`,
           fontWeight: 'bold',
-          color: lightState.state === 'on' ? '#000' : '#ccc',
+          color: lightState.brightness > 0 ? '#000' : '#ccc',
           zIndex: 2,
         }}
       >
@@ -111,9 +116,10 @@ const SimulationView = ({ numLights, lightStates }) => {
         position: 'relative',
         width: '100%',
         height: '100%',
-        backgroundColor: '#333',
-        borderRadius: '8px',
+        backgroundColor: 'transparent',
+        borderRadius: 0,
         overflow: 'hidden',
+        padding: '1rem',
       }}
     >
       {/* The track */}

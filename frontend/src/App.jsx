@@ -32,11 +32,23 @@ function App() {
 
   return (
     <Layout>
-      <ControlPanel
-        onConfigChange={handleConfigChange}
-        onSendCommand={handleSendCommand}
-      />
-      <SimulationView numLights={numLights} lightStates={lightStates} />
+      <header className="app-header">
+        <h1>Pacer Light Simulation</h1>
+      </header>
+      <div className="main-content">
+        <div className="control-panel-container">
+          <ControlPanel
+            onConfigChange={handleConfigChange}
+            onSendCommand={handleSendCommand}
+          />
+        </div>
+        <div className="simulation-view-container">
+          <SimulationView numLights={numLights} lightStates={lightStates} />
+        </div>
+      </div>
+      <footer className="app-footer">
+        <p>&copy; 2025 新Bug实验室. All rights reserved.</p>
+      </footer>
     </Layout>
   );
 }

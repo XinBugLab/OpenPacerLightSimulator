@@ -1,7 +1,36 @@
-#root {
-  margin: 0;
-  padding: 0;
+.app-header {
+  width: 100%;
+  background-color: #282c34;
+  padding: 0.5rem;
+  color: white;
   text-align: center;
+}
+
+.app-footer {
+  width: 100%;
+  background-color: transparent;
+  padding: 0.25rem 0;
+  color: #889;
+  text-align: center;
+  margin-top: auto; /* Push footer to the bottom */
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  text-align: left;
 }
 
 .logo {
@@ -43,7 +72,6 @@
 .App {
   display: flex;
   background-color: #282c34; /* 深色背景 */
-  height: 100vh;
   color: white; /* 亮色文字 */
 }
 
