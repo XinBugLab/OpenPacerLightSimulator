@@ -14,7 +14,7 @@ class PacerLight:
     def execute_command(self, command):
         if (command['id_mask'] & self.id) == self.id:
             self.target_brightness = command['brightness']
-            self.fade_in_duration = command['fade_in'] / 1000  # us to ms
+            self.fade_in_duration = command['fade_in']  # 已经是毫秒，不需要转换
             self.hold_duration = command['hold']
             self.fade_out_duration = command['fade_out']
             self.state = 'FADING_IN'

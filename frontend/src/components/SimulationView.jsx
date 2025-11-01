@@ -88,7 +88,23 @@ const SimulationView = ({ numLights, lightStates }) => {
       y = scaledCurveRadius + Math.sin(angle) * centerCurveRadius;
     }
 
-    const lightState = lightStates[i] || { state: 'off' };
+    const lightState = lightStates[i] || { state: 'off', brightness: 0 };
+    
+    // 计算基于brightness的颜色和透明度
+    const brightness = lightState.brightness || 0;
+    const normalizedBrightness = Math.max(0, Math.min(100, brightness)) / 100; // 确保在0-1范围内
+    
+    // 根据brightness计算颜色
+    const getLightColor = (brightness) => {
+      if (brightness === 0) return '#444';
+      // 从暗黄色到亮黄色的渐变
+      const intensity = Math.max(0.3, brightness); // 最小亮度为30%
+      return `rgba(255, 235, 59, ${intensity})`;
+    };
+    
+    const getTextColor = (brightness) => {
+      return brightness > 0.5 ? '#000' : '#ccc';
+    };
 
     lights.push(
       <div
@@ -100,15 +116,21 @@ const SimulationView = ({ numLights, lightStates }) => {
           transform: 'translate(-50%, -50%)',
           width: `${lightSize}px`,
           height: `${lightSize}px`,
-          backgroundColor: lightState.brightness > 0 ? '#ffeb3b' : '#444',
+          backgroundColor: getLightColor(normalizedBrightness),
           borderRadius: '50%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: `${lightSize / 2}px`,
           fontWeight: 'bold',
-          color: lightState.brightness > 0 ? '#000' : '#ccc',
+          color: getTextColor(normalizedBrightness),
           zIndex: 2,
+          // 添加平滑的过渡效果
+          transition: 'background-color 0.1s ease-in-out, color 0.1s ease-in-out',
+          // 添加发光效果
+          boxShadow: normalizedBrightness > 0 ? 
+            `0 0 ${lightSize * normalizedBrightness * 0.5}px rgba(255, 235, 59, ${normalizedBrightness * 0.8})` : 
+            'none',
         }}
       >
         <span>{i + 1}</span>
