@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
+import './CommandPanel.css';
 
 const CommandPanel = ({ onSendCommand }) => {
-    const [command, setCommand] = useState('0x01,100,1000,2000,1000');
+  const [command, setCommand] = useState('0x01,100,1000,2000,1000');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSendCommand(command);
-    };
+  const handleSend = () => {
+    onSendCommand(command);
+  };
 
-    return (
-        <div>
-            <h2>Command Panel</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Command:
-                    <input
-                        type="text"
-                        value={command}
-                        onChange={(e) => setCommand(e.target.value)}
-                    />
-                </label>
-                <button type="submit">Send</button>
-            </form>
-        </div>
-    );
+  return (
+    <div className="command-panel">
+      <h2>Command Panel</h2>
+      <label>
+        Command:
+        <input
+          type="text"
+          value={command}
+          onChange={(e) => setCommand(e.target.value)}
+        />
+      </label>
+      <button onClick={handleSend}>Send</button>
+    </div>
+  );
 };
 
 export default CommandPanel;

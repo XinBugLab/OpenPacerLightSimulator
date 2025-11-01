@@ -1,0 +1,19 @@
+.command-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.command-panel h2 {
+  margin: 0;
+}
+
+.command-panel label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.command-panel input {
+  width: 100%;
+}

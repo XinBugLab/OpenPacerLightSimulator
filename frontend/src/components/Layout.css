@@ -1,0 +1,33 @@
+/* frontend/src/components/Layout.css */
+.layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.control-panel-container {
+  flex: 0 0 300px; /* Control panel has a fixed width */
+  overflow-y: auto;
+}
+
+.simulation-view-container {
+  flex: 1 1 auto; /* Simulation view takes the remaining space */
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .control-panel-container {
+    flex: 0 0 auto; /* Height is automatic in column layout */
+    width: 100%;
+  }
+
+  .simulation-view-container {
+    flex: 1 1 auto; /* Takes remaining height */
+  }
+}

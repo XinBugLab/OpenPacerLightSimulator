@@ -1,0 +1,19 @@
+.light-config {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.light-config h2 {
+  margin: 0;
+}
+
+.light-config label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.light-config input {
+  width: 50px;
+}
