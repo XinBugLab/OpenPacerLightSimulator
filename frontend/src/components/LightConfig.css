@@ -47,3 +47,29 @@
 .light-config button:hover {
   border-color: #646cff;
 }
+
+/* Responsive styles for small screens */
+@media (max-width: 480px) {
+  .light-config {
+    gap: 0.25rem; /* Reduce gap on small screens */
+  }
+  
+  .light-config h2 {
+    font-size: 1.1rem; /* Smaller heading */
+    margin-bottom: 0.5rem;
+  }
+  
+  .light-config label {
+    font-size: 0.9rem; /* Smaller label text */
+  }
+  
+  .light-config input {
+    width: 40px; /* Smaller input width */
+    padding: 0.2rem 0.4rem; /* Smaller padding */
+  }
+  
+  .light-config button {
+    padding: 0.4rem 0.8rem; /* Smaller button padding */
+    font-size: 0.9rem; /* Smaller button text */
+  }
+}

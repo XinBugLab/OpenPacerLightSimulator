@@ -2,9 +2,8 @@
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh; /* Use min-height instead of height to allow page growth */
   width: 100%;
-  overflow: hidden;
 }
 
 .app-header {
@@ -19,16 +18,18 @@
   display: flex;
   flex-grow: 1;
   background-color: #f3f4f6;
+  min-height: 0; /* Allow content to grow naturally */
 }
 
 .control-panel-container {
-  flex: 0 0 280px; /* Slightly smaller control panel width for better fit */
-  min-width: 250px; /* Minimum width to prevent crushing */
+  flex: 0 0 250px; /* Smaller control panel width for more simulation space */
+  min-width: 200px; /* Reduced minimum width */
 }
 
 .simulation-view-container {
   flex: 1 1 auto; /* Simulation view takes the remaining space */
-  overflow: hidden;
+  min-height: 400px; /* Set minimum height instead of using overflow */
+  /* Remove overflow: auto to allow page-level scrolling */
 }
 
 @media (max-width: 768px) {
@@ -43,5 +44,25 @@
 
   .simulation-view-container {
     flex: 1 1 auto; /* Takes remaining height */
+    min-height: 300px; /* Ensure minimum space for simulation */
+  }
+}
+
+/* Extra small screens (like 383px width) */
+@media (max-width: 480px) {
+  .control-panel-container {
+    min-width: 0; /* Remove minimum width constraint */
+    flex: 0 0 auto; /* Auto height in column layout */
+    width: 100%;
+    /* Remove max-height constraint to allow natural content flow */
+  }
+  
+  .main-content {
+    flex-direction: column; /* Force vertical layout on very small screens */
+  }
+  
+  .simulation-view-container {
+    flex: 1 1 auto;
+    min-height: 200px; /* Ensure simulation view has minimum space */
   }
 }

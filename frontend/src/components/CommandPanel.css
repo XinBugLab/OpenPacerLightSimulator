@@ -50,3 +50,31 @@
 .command-panel button:hover {
   border-color: #646cff;
 }
+
+/* Responsive styles for small screens */
+@media (max-width: 480px) {
+  .command-panel {
+    gap: 0.25rem; /* Reduce gap on small screens */
+  }
+  
+  .command-panel h2 {
+    font-size: 1.1rem; /* Smaller heading */
+    margin-bottom: 0.5rem;
+  }
+  
+  .command-panel label {
+    font-size: 0.9rem; /* Smaller label text */
+  }
+  
+  .command-panel input {
+    padding: 0.4rem; /* Smaller padding */
+    font-size: 0.9rem; /* Smaller input text */
+    margin-top: 0.2rem;
+  }
+  
+  .command-panel button {
+    padding: 0.4rem 0.8rem; /* Smaller button padding */
+    font-size: 0.9rem; /* Smaller button text */
+    margin-top: 0.4rem;
+  }
+}

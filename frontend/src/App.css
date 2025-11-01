@@ -28,7 +28,7 @@
 
 #root {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh; /* 改为min-height以匹配.layout的设置 */
   margin: 0;
   text-align: left;
 }

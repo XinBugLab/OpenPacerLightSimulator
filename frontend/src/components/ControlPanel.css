@@ -6,6 +6,8 @@
   padding: 1rem;
   border-radius: 0;
   border-right: 1px solid #e5e7eb;
+  min-height: 100%; /* Use min-height instead of height */
+  /* Remove overflow settings to allow page-level scrolling */
 }
 
 h2 {

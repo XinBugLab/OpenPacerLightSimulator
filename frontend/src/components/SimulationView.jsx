@@ -30,10 +30,17 @@ const SimulationView = ({ numLights, lightStates }) => {
   const originalHeight = 2 * curveRadius;
 
   const SAFETY_FACTOR = 0.92;
-  const scale = SAFETY_FACTOR * Math.min(
-    containerSize.width / originalWidth,
-    containerSize.height / originalHeight
-  );
+  
+  // Ensure minimum scale to prevent invisible track
+  const minScale = 0.3; // Minimum scale factor
+  const calculatedScale = containerSize.width > 0 && containerSize.height > 0 
+    ? SAFETY_FACTOR * Math.min(
+        containerSize.width / originalWidth,
+        containerSize.height / originalHeight
+      )
+    : 1; // Default scale when container size is not available
+  
+  const scale = Math.max(minScale, calculatedScale);
 
   const scaledStraightLength = straightLength * scale;
   const scaledCurveRadius = curveRadius * scale;
@@ -116,10 +123,13 @@ const SimulationView = ({ numLights, lightStates }) => {
         position: 'relative',
         width: '100%',
         height: '100%',
-        backgroundColor: 'transparent',
+        minWidth: '300px', /* 减小最小宽度以适应更小的屏幕 */
+        minHeight: '300px', /* Ensure minimum height for track visibility */
+        backgroundColor: '#f8f9fa', /* Light background to see the track */
         borderRadius: 0,
-        overflow: 'hidden',
+        /* Remove overflow: auto to allow page-level scrolling */
         padding: '1rem',
+        boxSizing: 'border-box', /* 确保padding包含在总宽度内 */
       }}
     >
       {/* The track */}
